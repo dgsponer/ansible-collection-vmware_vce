@@ -24,11 +24,11 @@
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
 | Network Configuration |||||
-| guestinfo.cis.appliance.net.addr.family | true | | Host Network IP Address Family | Network IP address family (i.e., &apos;ipv4&apos; or &apos;ipv6&apos;). |
-| guestinfo.cis.appliance.net.mode | true | | Host Network Mode | Network mode (i.e., &apos;static&apos;, &apos;dhcp&apos;, or &apos;autoconf&apos; (IPv6 only). |
-| guestinfo.cis.appliance.net.addr | true | | Host Network IP Address | Network IP address.  Only provide this when mode is &apos;static&apos;.  Can be IPv4 or IPv6 based on specified address family. |
-| guestinfo.cis.appliance.net.prefix | true | | Host Network Prefix | Network prefix length.  Only provide this when mode is &apos;static&apos;.  0-32 for IPv4.  0-128 for IPv6. |
-| guestinfo.cis.appliance.net.gateway | true | | Host Network Default Gateway | IP address of default gateway.  Can be &apos;default&apos; when using IPv6. |
+| guestinfo.cis.appliance.net.addr.family | true | | Host Network IP Address Family | Network IP address family (i.e., 'ipv4' or 'ipv6'). |
+| guestinfo.cis.appliance.net.mode | true | | Host Network Mode | Network mode (i.e., 'static', 'dhcp', or 'autoconf' (IPv6 only). |
+| guestinfo.cis.appliance.net.addr | true | | Host Network IP Address | Network IP address.  Only provide this when mode is 'static'.  Can be IPv4 or IPv6 based on specified address family. |
+| guestinfo.cis.appliance.net.prefix | true | | Host Network Prefix | Network prefix length.  Only provide this when mode is 'static'.  0-32 for IPv4.  0-128 for IPv6. |
+| guestinfo.cis.appliance.net.gateway | true | | Host Network Default Gateway | IP address of default gateway.  Can be 'default' when using IPv6. |
 | guestinfo.cis.appliance.net.dns.servers | true | | Host Network DNS Servers | Comma separated list of IP addresses of DNS servers. |
 | guestinfo.cis.appliance.net.pnid | true | | Host Network Identity | Network identity (IP address or fully-qualified domain name) services should use when advertising themselves. |
 | guestinfo.cis.appliance.net.ports | false | {} | Custom Network Ports | A string encoding a JSON object mapping port names to port numbers. |
@@ -39,20 +39,20 @@
 | guestinfo.cis.vmdir.username | false | administrator@vsphere.local | Directory Username | For the first instance of the identity domain, this is the username with Administrator privileges. Otherwise, this is the username of the replication partner. |
 | guestinfo.cis.vmdir.password | true | | Directory Password | For the first instance of the identity domain, this is the password given to the Administrator account.  Otherwise, this is the password of the Administrator account of the replication partner. |
 | guestinfo.cis.vmdir.domain-name | false | vsphere.local | Directory Domain Name | For the first instance of the identity domain, this is the name of the newly created domain |
-| guestinfo.cis.vmdir.site-name | false | Default-First-Site | Site Name | Name of site.  Use &apos;Default-First-Site&apos; to define a new site. |
+| guestinfo.cis.vmdir.site-name | false | Default-First-Site | Site Name | Name of site.  Use 'Default-First-Site' to define a new site. |
 | guestinfo.cis.vmdir.first-instance | false | True | New Identity Domain | If this parameter is set to True, the VMware directory instance is setup as the first instance of a new identity domain. Otherwise, the instance is setup as a replication partner. |
 | guestinfo.cis.vmdir.replication-partner-hostname | false | "" | Directory Replication Partner | The hostname of the VMware directory replication partner.  This value is ignored for the first instance of the identity domain. |
 
 ## Database Configuration
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
-| guestinfo.cis.db.type | false | embedded | Database Type | String indicating whether the database is &apos;embedded&apos; or &apos;external&apos;. |
-| guestinfo.cis.db.user | false |"" | Database User | String naming the account to use when connecting to external database (ignored when db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.password | false |  | Database Password | String providing the password to use when connecting to external database (ignored when db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.servername | false |  | Database Server | String naming the hostname of the server on which the external database is running (ignored when db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.serverport | false |  | Database Port | String describing the port on the host on which the external database is running (ignored when db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.provider | false |  | Database Provider | String describing the external database provider. The only supported value is &apos;oracle&apos; (ignored when the db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.instance | false |  | Database Instance | String describing the external database instance. Values could be anything depending on what the database instance name the DBA creates in the external db. (ignored when the db.type is &apos;embedded&apos;). |
+| guestinfo.cis.db.type | false | embedded | Database Type | String indicating whether the database is 'embedded' or 'external'. |
+| guestinfo.cis.db.user | false |"" | Database User | String naming the account to use when connecting to external database (ignored when db.type is 'embedded'). |
+| guestinfo.cis.db.password | false |  | Database Password | String providing the password to use when connecting to external database (ignored when db.type is 'embedded'). |
+| guestinfo.cis.db.servername | false |  | Database Server | String naming the hostname of the server on which the external database is running (ignored when db.type is 'embedded'). |
+| guestinfo.cis.db.serverport | false |  | Database Port | String describing the port on the host on which the external database is running (ignored when db.type is 'embedded'). |
+| guestinfo.cis.db.provider | false |  | Database Provider | String describing the external database provider. The only supported value is 'oracle' (ignored when the db.type is 'embedded'). |
+| guestinfo.cis.db.instance | false |  | Database Instance | String describing the external database instance. Values could be anything depending on what the database instance name the DBA creates in the external db. (ignored when the db.type is 'embedded'). |
 
 ## System Configuration
 | Parameter | UserConfigurable | Default | Label | Description |
@@ -62,8 +62,8 @@
 | guestinfo.cis.appliance.ssh.enabled | false | False | SSH Enabled | Set whether SSH-based remote login is enabled.  This configuration can be changed after deployment. |
 | guestinfo.cis.appliance.time.tools-sync | false | False | Tools-based Time Synchronization Enabled | Set whether VMware tools based time synchronization should be used. This parameter is ignored if appliance.ntp.servers is not empty. |
 | guestinfo.cis.appliance.ntp.servers | false |  | NTP Servers | A comma-separated list of hostnames or IP addresses of NTP Servers |
-| guestinfo.cis.deployment.node.type | false | embedded | Deployment Type | Type of appliance to deploy (i.e. &apos;embedded&apos;). |
-| guestinfo.cis.system.vm0.hostname | false |  | Platform Services Controller | When deploying a vCenter Server Node, please provide the FQDN or IP address of a Platform Services Controller (leave blank otherwise).  The choice of FQDN versus IP address is decided based on the Platform Services Controller&apos;s own notion of its network identity. |
+| guestinfo.cis.deployment.node.type | false | embedded | Deployment Type | Type of appliance to deploy (i.e. 'embedded'). |
+| guestinfo.cis.system.vm0.hostname | false |  | Platform Services Controller | When deploying a vCenter Server Node, please provide the FQDN or IP address of a Platform Services Controller (leave blank otherwise).  The choice of FQDN versus IP address is decided based on the Platform Services Controller's own notion of its network identity. |
 | guestinfo.cis.system.vm0.port | false | 443 | HTTPS Port on Platform Services Controller | When deploying a vCenter Server pointing to an external platform services controller, please provide the HTTPS port of the external platform services controller if a custom port number is being used. The default HTTPS port number is 443. |
 
 ## Upgrade Configuration
@@ -96,25 +96,28 @@
 ## Miscellaneous
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
-| guestinfo.cis.netdump.enabled | xxx | xxx | xxx | xxx |
-| guestinfo.cis.silentinstall | xxx | xxx | xxx | xxx |
-| guestinfo.cis.lookup_timeout | xxx | xxx | xxx | xxx |
-| guestinfo.cis.clientlocale | xxx | xxx | xxx | xxx |
-| guestinfo.cis.feature.states | xxx | xxx | xxx | xxx |
-| guestinfo.cis.ceip_enabled | xxx | xxx | xxx | xxx |
-| guestinfo.cis.deployment.autoconfig | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vpxd.mac-allocation-scheme.prefix | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vpxd.mac-allocation-scheme.prefix-length | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vpxd.mac-allocation-scheme.ranges | xxx | xxx | xxx | xxx |
-| guestinfo.cis.plugin-isolation.hostname | xxx | xxx | xxx | xxx |
-| guestinfo.cis.osgi.settings.isolation | xxx | xxx | xxx | xxx |
-| guestinfo.cis.hadcs.enabled | xxx | xxx | xxx | xxx |
-| guestinfo.cis.fips.enabled | xxx | xxx | xxx | xxx |
-| guestinfo.cis.desired.state | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vsan.postfirstboot.setting | xxx | xxx | xxx | xxx |
-| guestinfo.cis.env.classification.level | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vc.desired.state | xxx | xxx | xxx | xxx |
-| guestinfo.cis.deployment.license | xxx | xxx | xxx | xxx |
+| guestinfo.cis.netdump.enabled | false | True | ESXi Dump Collector Enabled | Set whether ESXi Dump Collector service is enabled.  This configuration can be changed after deployment. |
+| guestinfo.cis.silentinstall | false | False | Do Silent Install | If this parameter is set to True, no questions will be posted during install or upgrade. Otherwise, the install process will wait for a reply if there is a pending question. |
+| guestinfo.cis.lookup_timeout | false | 900 | DNS reverse lookup timeout | This parameter provides time in seconds, to retry DNS reverse lookup. This is only needed for parallel installation of VCSA and NSX_T. |
+| guestinfo.cis.clientlocale | false | en | The Client Locale | This parameter specifies the client locale. Supported locales are en, fr, ja, ko, zh_CN and zh_TW. English is assumed if locale is unknown. |
+| guestinfo.cis.feature.states | false | | Feature switch states | Specify feature switch states which need to be added or modified in feature switch state config file. Format: key1=value1, key2=value2 |
+
+| guestinfo.cis.ceip_enabled | true | False | CEIP enabled | VMware’s Customer Experience Improvement Program ("CEIP") provides VMware with information that enables VMware to improve its products and services, to fix problems, and to advise you on how best to deploy and use our products. As part of the CEIP, VMware collects technical information about your organization’s use of VMware products and services on a regular basis in association with your organization’s VMware license key(s). This information does not personally identify any individual. For more details about the Program and how VMware uses the information it collects through CEIP, please see the product documentation at http://www.vmware.com/info?id=1399. If you want to participate in VMware’s CEIP for this product, set this property to True. You may join or leave VMware’s CEIP for this product at any time. |
+| guestinfo.cis.deployment.autoconfig | false | False | Auto Start Services | If this parameter is set to True, the appliance will be configured after deployment using the specified OVF configuration parameters. If set to False, the appliance should be configured post-deployment using the VMware Appliance Management Interface. |
+| guestinfo.cis.vpxd.mac-allocation-scheme.prefix | false | | MAC address allocation scheme prefix | If a valid MAC address prefix is provided, then all MAC addresses assigned by vCenter Server will begin with this prefix instead of the VMware OUI. This property cannot co-exist with mac-allocation-scheme.ranges |
+| guestinfo.cis.vpxd.mac-allocation-scheme.prefix-length | false | 0 | MAC address allocation scheme prefix length | This property is mandatory whenever a custom MAC prefix is provided. |
+| guestinfo.cis.vpxd.mac-allocation-scheme.ranges | false | | MAC address allocation scheme ranges | If valid MAC address range is provided, then vCenter Server will assign MAC addresses from this range instead of allocating VMware OUI based MAC address. The address range must be provided in the format "BeginAddress1-EndAddress1,...,BeginAddressN-EndAddressN". This property cannot co-exist with mac-allocation-scheme.prefix. |
+
+| guestinfo.cis.plugin-isolation.hostname | false | | Hostname to use when loading vSphere Client plugins in the browser. | Isolation hostname that guards plugins from interfering with the core vSphere UI. |
+| guestinfo.cis.osgi.settings.isolation | false | | Local plugins for which to add an isolation exception in the vSphere Client. | Local plugins for which the vSphere Client will not apply isolation. Format: plugin1, plugin2, plugin3 |
+| guestinfo.cis.hadcs.enabled | true | True | Control HADCS enablement | If this parameter is set to True, the HADCS functionality will be enabled on the vCenter inventory. If set to False, the HADCS functionality will be disabled on the vCenter inventory. |
+| guestinfo.cis.fips.enabled | false | False | Control VC FIPS enablement | If this parameter is set to True, the vCenter will be started in FIPS compliant mode. If set to False, the vCenter will be started in non-FIPS compliant mode. |
+| guestinfo.cis.desired.state | false | {} | Desired State Configuations | String encoding JSON object desired state configuration which will be acquired by the deployment. |
+
+| guestinfo.cis.vsan.postfirstboot.setting | true | | VSAN post first boot settings | If this property is set, the vCenter will be installed on a new VSAN cluster containing the target host. dcname, dedupEnabled, clusterName, vsanLicenseKey, and firstHost properties should be set with this. For example: {'dcName':'vsanDC','clusterName':'vsanCluster','dedupEnabled':false,'vsanLicenseKey':'','firstHost':{'hostName':'10.109.45.3','port':443,'userName':'root','password':'ca$hc0w'}}. |
+| guestinfo.cis.env.classification.level | false | none | IL6 classifciation level | Impact Level 6 classification level. Supported values: 'none', 'unclassified', 'controlled', 'cui', 'confidential', 'secret', 'topsecret', 'topsecret_sci'. |
+| guestinfo.cis.vc.desired.state | false | {} | vCenter Desired State Configuations | String encoding JSON object desired state configuration which will be acquired by the deployment. |
+| guestinfo.cis.deployment.license | false | | vCenter License | The licenses to apply during the deployment or upgrade. Format: name1=key1,name2=key2 |
 
 # VAMI Properties
 ## Networking Properties
@@ -124,6 +127,8 @@
 | searchpath | true | | Domain Search Path | The domain search path (comma or space separated domain names) for this VM. Leave blank if DHCP is desired. |
 
 # VM specific properties
+| Parameter | UserConfigurable | Default | Label | Description |
+|---|---|---|---|---|
 | vmname | | VMware-vCenter-Server-Appliance | | |
 
 # Network
