@@ -47,51 +47,51 @@
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
 | guestinfo.cis.db.type | false | embedded | Database Type | String indicating whether the database is &apos;embedded&apos; or &apos;external&apos;. |
-| guestinfo.cis.db.user | false | "" | Database User | String naming the account to use when connecting to external database (ignored when db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.password | false | "" | Database Password | String providing the password to use when connecting to external database (ignored when db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.servername | false | "" | Database Server | String naming the hostname of the server on which the external database is running (ignored when db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.serverport | false | "" | Database Port | String describing the port on the host on which the external database is running (ignored when db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.provider | false | "" | Database Provider | String describing the external database provider. The only supported value is &apos;oracle&apos; (ignored when the db.type is &apos;embedded&apos;). |
-| guestinfo.cis.db.instance | false | "" | Database Instance | String describing the external database instance. Values could be anything depending on what the database instance name the DBA creates in the external db. (ignored when the db.type is &apos;embedded&apos;). |
+| guestinfo.cis.db.user | false |"" | Database User | String naming the account to use when connecting to external database (ignored when db.type is &apos;embedded&apos;). |
+| guestinfo.cis.db.password | false |  | Database Password | String providing the password to use when connecting to external database (ignored when db.type is &apos;embedded&apos;). |
+| guestinfo.cis.db.servername | false |  | Database Server | String naming the hostname of the server on which the external database is running (ignored when db.type is &apos;embedded&apos;). |
+| guestinfo.cis.db.serverport | false |  | Database Port | String describing the port on the host on which the external database is running (ignored when db.type is &apos;embedded&apos;). |
+| guestinfo.cis.db.provider | false |  | Database Provider | String describing the external database provider. The only supported value is &apos;oracle&apos; (ignored when the db.type is &apos;embedded&apos;). |
+| guestinfo.cis.db.instance | false |  | Database Instance | String describing the external database instance. Values could be anything depending on what the database instance name the DBA creates in the external db. (ignored when the db.type is &apos;embedded&apos;). |
 
 ## System Configuration
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
 | guestinfo.cis.appliance.root.passwd | true |  | Root Password | Password to assign to root account.  If blank, password can be set on the console. |
-| guestinfo.cis.appliance.root.shell | false | "" | Root Shell | This property is not changeable. |
+| guestinfo.cis.appliance.root.shell | false |  | Root Shell | This property is not changeable. |
 | guestinfo.cis.appliance.ssh.enabled | false | False | SSH Enabled | Set whether SSH-based remote login is enabled.  This configuration can be changed after deployment. |
 | guestinfo.cis.appliance.time.tools-sync | false | False | Tools-based Time Synchronization Enabled | Set whether VMware tools based time synchronization should be used. This parameter is ignored if appliance.ntp.servers is not empty. |
-| guestinfo.cis.appliance.ntp.servers | false | "" | NTP Servers | A comma-separated list of hostnames or IP addresses of NTP Servers |
+| guestinfo.cis.appliance.ntp.servers | false |  | NTP Servers | A comma-separated list of hostnames or IP addresses of NTP Servers |
 | guestinfo.cis.deployment.node.type | false | embedded | Deployment Type | Type of appliance to deploy (i.e. &apos;embedded&apos;). |
-| guestinfo.cis.system.vm0.hostname | false | "" | Platform Services Controller | When deploying a vCenter Server Node, please provide the FQDN or IP address of a Platform Services Controller (leave blank otherwise).  The choice of FQDN versus IP address is decided based on the Platform Services Controller&apos;s own notion of its network identity. |
+| guestinfo.cis.system.vm0.hostname | false |  | Platform Services Controller | When deploying a vCenter Server Node, please provide the FQDN or IP address of a Platform Services Controller (leave blank otherwise).  The choice of FQDN versus IP address is decided based on the Platform Services Controller&apos;s own notion of its network identity. |
 | guestinfo.cis.system.vm0.port | false | 443 | HTTPS Port on Platform Services Controller | When deploying a vCenter Server pointing to an external platform services controller, please provide the HTTPS port of the external platform services controller if a custom port number is being used. The default HTTPS port number is 443. |
 
 ## Upgrade Configuration
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
-| guestinfo.cis.upgrade.source.vpxd.ip | false | "" | Upgrade Source Hostname | IP/hostname of the appliance to upgrade. Set only for upgrade. |
+| guestinfo.cis.upgrade.source.vpxd.ip | false |  | Upgrade Source Hostname | IP/hostname of the appliance to upgrade. Set only for upgrade. |
 | guestinfo.cis.upgrade.source.ma.port | false | 9123 | Migration Assistant Port | Port used by Migration Assistant on source vCenter Server. |
-| guestinfo.cis.upgrade.source.vpxd.user | false | "" | Upgrade Source vCenter Username | vCenter username for the appliance to upgrade. Set only for upgrade. |
-| guestinfo.cis.upgrade.source.vpxd.password | false | "" | Upgrade Source vCenter Password | vCenter password for the appliance to upgrade. Set only for upgrade. |
-| guestinfo.cis.upgrade.source.guest.user | false | "" | Upgrade Source OS Username | Username for the appliance operating system to upgrade.  Usually root. Set only for upgrade. |
-| guestinfo.cis.upgrade.source.guest.password | false | "" | Upgrade Source OS Password | Password for the appliance operating system to upgrade. Set only for upgrade. |
-| guestinfo.cis.upgrade.source.guestops.host.addr | false | "" | Upgrade Management Host Hostname | URL that consists of the IP address or FQDN and https port of the vCenter Server instance or ESXi host that manages the appliance to upgrade. Https port is an optional parameter which by default is 443. Example: 10.10.10.10, //10.10.10.10:444, //[2001:db8:a0b:12f0::1]:444. Set only for upgrade. |
-| guestinfo.cis.upgrade.source.guestops.host.user | false | "" | Upgrade Management Host Username | Username for the host that manages appliance to upgrade.  Can be  either vCenter or ESX host.  Set only for upgrade. |
-| guestinfo.cis.upgrade.source.guestops.host.password | false | "" | Upgrade Management Host Password | Password for the host that manages appliance to upgrade.  Can be  either vCenter or ESX host.  Set only for upgrade. |
-| guestinfo.cis.upgrade.source.ssl.thumbprint | false | "" | xxx | xxx |
-| guestinfo.cis.upgrade.source.platform | false | linux | xxx | xxx |
-| guestinfo.cis.upgrade.source.export.directory | false | /var/tmp | xxx | xxx |
-| guestinfo.cis.upgrade.import.directory | xxx | xxx | xxx | xxx |
-| guestinfo.cis.upgrade.user.options | xxx | xxx | xxx | xxx |
-| guestinfo.cis.ad.domain-name | xxx | xxx | xxx | xxx |
-| guestinfo.cis.ad.domain.username | xxx | xxx | xxx | xxx |
-| guestinfo.cis.ad.domain.password | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vpxd.ha.management.addr | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vpxd.ha.management.port | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vpxd.ha.management.user | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vpxd.ha.management.password | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vpxd.ha.management.thumbprint | xxx | xxx | xxx | xxx |
-| guestinfo.cis.vpxd.ha.placement | xxx | xxx | xxx | xxx |
+| guestinfo.cis.upgrade.source.vpxd.user | false |  | Upgrade Source vCenter Username | vCenter username for the appliance to upgrade. Set only for upgrade. |
+| guestinfo.cis.upgrade.source.vpxd.password | false |  | Upgrade Source vCenter Password | vCenter password for the appliance to upgrade. Set only for upgrade. |
+| guestinfo.cis.upgrade.source.guest.user | false |  | Upgrade Source OS Username | Username for the appliance operating system to upgrade.  Usually root. Set only for upgrade. |
+| guestinfo.cis.upgrade.source.guest.password | false |  | Upgrade Source OS Password | Password for the appliance operating system to upgrade. Set only for upgrade. |
+| guestinfo.cis.upgrade.source.guestops.host.addr | false |  | Upgrade Management Host Hostname | URL that consists of the IP address or FQDN and https port of the vCenter Server instance or ESXi host that manages the appliance to upgrade. Https port is an optional parameter which by default is 443. Example: 10.10.10.10, //10.10.10.10:444, //[2001:db8:a0b:12f0::1]:444. Set only for upgrade. |
+| guestinfo.cis.upgrade.source.guestops.host.user | false |  | Upgrade Management Host Username | Username for the host that manages appliance to upgrade.  Can be  either vCenter or ESX host.  Set only for upgrade. |
+| guestinfo.cis.upgrade.source.guestops.host.password | false |  | Upgrade Management Host Password | Password for the host that manages appliance to upgrade.  Can be  either vCenter or ESX host.  Set only for upgrade. |
+| guestinfo.cis.upgrade.source.ssl.thumbprint | false |  | Upgrade Management Host Thumbprint | Thumbprint for the SSL certificate of the host that manages the appliance to upgrade. Set only for upgrade. |
+| guestinfo.cis.upgrade.source.platform | false | linux | Upgrade Source Platform | Source host platform. Optional. Set only for upgrade |
+| guestinfo.cis.upgrade.source.export.directory | false | /var/tmp | Upgrade Source Export Folder | Folder on the source appliance, where to store migrate data. Optional. Set only for upgrade |
+| guestinfo.cis.upgrade.import.directory | false | /storage/seat/cis-export-folder | Upgrade Destination Export Folder | Folder where exported source data will be stored in the appliance. Optional. Set only for upgrade |
+| guestinfo.cis.upgrade.user.options | false |  | Upgrade Advanced Options | Advanced upgrade settings specified in json format. Optional. Set only for upgrade |
+| guestinfo.cis.ad.domain-name | false |  | Active Directory domain name | Active Directory domain to join. |
+| guestinfo.cis.ad.domain.username | false |  | Active Directory domain admin user | Active Directory domain admin user. This username will be used to join the machine to the domain. |
+| guestinfo.cis.ad.domain.password | false |  | Active Directory domain admin user password | Active Directory domain admin user password. This password will be used to join the machine to the domain. |
+| guestinfo.cis.vpxd.ha.management.addr | true | | vCenter Server managing target appliance | FQDN or IP address of the vCenter Server managing that target appliance. Used when upgrading a source appliance in VCHA cluster. |
+| guestinfo.cis.vpxd.ha.management.port | true | 443 | Port of the vCenter Server managing target appliance | Https port of the vCenter Server managing that target appliance. Used when upgrading a source appliance in VCHA cluster. If not specified, port 443 will be used by default. |
+| guestinfo.cis.vpxd.ha.management.user | true | | Username for the vCenter Server managing target appliance | User able to authenticate in vCenter Server managing that target appliance. The user must have the privilege Global.VCServer. Used when upgrading a source appliance in VCHA cluster. |
+| guestinfo.cis.vpxd.ha.management.password | true | | Password for the vCenter Server managing target appliance | Password for administrator user authenticating to the vCenter Server managing target appliance. Used when upgrading a source appliance in VCHA cluster. |
+| guestinfo.cis.vpxd.ha.management.thumbprint | true | | Thumbprint for the SSL certificate of the vCenter Server managing target appliance | Thumbprint for the SSL certificate of the vCenter Server that manages the appliance to upgrade. Used when upgrading a source appliance in VCHA cluster. |
+| guestinfo.cis.vpxd.ha.placement | true | | Path to the compute resource where target appliance will be deployed on management vCenter Server | Path to host/cluster/resource pool where target appliance will be deployed on management vCenter Server. Used when upgrading a source appliance in VCHA cluster. Example: /my_datacenter/my_folder/my_host_or_cluster/my_resource_pool |
 
 ## Miscellaneous
 | Parameter | UserConfigurable | Default | Label | Description |
