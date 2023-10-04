@@ -24,7 +24,7 @@
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
 
-| Network Configuration ||
+| Network Configuration |||||
 | guestinfo.cis.appliance.net.addr.family | true | | Host Network IP Address Family | Network IP address family (i.e., &apos;ipv4&apos; or &apos;ipv6&apos;). |
 | guestinfo.cis.appliance.net.mode | true | | Host Network Mode | Network mode (i.e., &apos;static&apos;, &apos;dhcp&apos;, or &apos;autoconf&apos; (IPv6 only). |
 | guestinfo.cis.appliance.net.addr | true | | Host Network IP Address | Network IP address.  Only provide this when mode is &apos;static&apos;.  Can be IPv4 or IPv6 based on specified address family. |
@@ -33,16 +33,14 @@
 | guestinfo.cis.appliance.net.dns.servers | true | | Host Network DNS Servers | Comma separated list of IP addresses of DNS servers. |
 | guestinfo.cis.appliance.net.pnid | true | | Host Network Identity | Network identity (IP address or fully-qualified domain name) services should use when advertising themselves. |
 | guestinfo.cis.appliance.net.ports | false | {} | Custom Network Ports | A string encoding a JSON object mapping port names to port numbers. |
-
-| SSO Configuration||
+| SSO Configuration |||||
 | guestinfo.cis.vmdir.username | false | administrator@vsphere.local | Directory Username | For the first instance of the identity domain, this is the username with Administrator privileges. Otherwise, this is the username of the replication partner. |
 | guestinfo.cis.vmdir.password | true | | Directory Password | For the first instance of the identity domain, this is the password given to the Administrator account.  Otherwise, this is the password of the Administrator account of the replication partner. |
 | guestinfo.cis.vmdir.domain-name | false | vsphere.local | Directory Domain Name | For the first instance of the identity domain, this is the name of the newly created domain |
 | guestinfo.cis.vmdir.site-name | false | Default-First-Site | Site Name | Name of site.  Use &apos;Default-First-Site&apos; to define a new site. |
 | guestinfo.cis.vmdir.first-instance | false | True | New Identity Domain | If this parameter is set to True, the VMware directory instance is setup as the first instance of a new identity domain. Otherwise, the instance is setup as a replication partner. |
 | guestinfo.cis.vmdir.replication-partner-hostname | false | "" | Directory Replication Partner | The hostname of the VMware directory replication partner.  This value is ignored for the first instance of the identity domain. |
-
-| Database Configuration ||
+| Database Configuration |||||
 | guestinfo.cis.db.type | false | embedded | Database Type | String indicating whether the database is &apos;embedded&apos; or &apos;external&apos;. |
 | guestinfo.cis.db.user | false | "" | Database User | String naming the account to use when connecting to external database (ignored when db.type is &apos;embedded&apos;). |
 | guestinfo.cis.db.password | false | "" | Database Password | String providing the password to use when connecting to external database (ignored when db.type is &apos;embedded&apos;). |
@@ -50,8 +48,7 @@
 | guestinfo.cis.db.serverport | false | "" | Database Port | String describing the port on the host on which the external database is running (ignored when db.type is &apos;embedded&apos;). |
 | guestinfo.cis.db.provider | false | "" | Database Provider | String describing the external database provider. The only supported value is &apos;oracle&apos; (ignored when the db.type is &apos;embedded&apos;). |
 | guestinfo.cis.db.instance | false | "" | Database Instance | String describing the external database instance. Values could be anything depending on what the database instance name the DBA creates in the external db. (ignored when the db.type is &apos;embedded&apos;). |
-
-| System Configuration ||
+| System Configuration |||||
 | guestinfo.cis.appliance.root.passwd | true |  | Root Password | Password to assign to root account.  If blank, password can be set on the console. |
 | guestinfo.cis.appliance.root.shell | false | "" | Root Shell | This property is not changeable. |
 | guestinfo.cis.appliance.ssh.enabled | false | False | SSH Enabled | Set whether SSH-based remote login is enabled.  This configuration can be changed after deployment. |
@@ -60,8 +57,7 @@
 | guestinfo.cis.deployment.node.type | false | embedded | Deployment Type | Type of appliance to deploy (i.e. &apos;embedded&apos;). |
 | guestinfo.cis.system.vm0.hostname | false | "" | Platform Services Controller | When deploying a vCenter Server Node, please provide the FQDN or IP address of a Platform Services Controller (leave blank otherwise).  The choice of FQDN versus IP address is decided based on the Platform Services Controller&apos;s own notion of its network identity. |
 | guestinfo.cis.system.vm0.port | false | 443 | HTTPS Port on Platform Services Controller | When deploying a vCenter Server pointing to an external platform services controller, please provide the HTTPS port of the external platform services controller if a custom port number is being used. The default HTTPS port number is 443. |
-
-| Upgrade Configuration ||
+| Upgrade Configuration |||||
 | guestinfo.cis.upgrade.source.vpxd.ip | false | "" | Upgrade Source Hostname | IP/hostname of the appliance to upgrade. Set only for upgrade. |
 | guestinfo.cis.upgrade.source.ma.port | false | 9123 | Migration Assistant Port | Port used by Migration Assistant on source vCenter Server. |
 | guestinfo.cis.upgrade.source.vpxd.user | false | "" | Upgrade Source vCenter Username | vCenter username for the appliance to upgrade. Set only for upgrade. |
@@ -85,8 +81,7 @@
 | guestinfo.cis.vpxd.ha.management.password | xxx | xxx | xxx | xxx |
 | guestinfo.cis.vpxd.ha.management.thumbprint | xxx | xxx | xxx | xxx |
 | guestinfo.cis.vpxd.ha.placement | xxx | xxx | xxx | xxx |
-
-| Miscellaneous ||
+| Miscellaneous |||||
 | guestinfo.cis.netdump.enabled | xxx | xxx | xxx | xxx |
 | guestinfo.cis.silentinstall | xxx | xxx | xxx | xxx |
 | guestinfo.cis.lookup_timeout | xxx | xxx | xxx | xxx |
