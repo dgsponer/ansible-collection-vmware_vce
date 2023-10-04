@@ -23,7 +23,6 @@
 # Application
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
-
 | Network Configuration |||||
 | guestinfo.cis.appliance.net.addr.family | true | | Host Network IP Address Family | Network IP address family (i.e., &apos;ipv4&apos; or &apos;ipv6&apos;). |
 | guestinfo.cis.appliance.net.mode | true | | Host Network Mode | Network mode (i.e., &apos;static&apos;, &apos;dhcp&apos;, or &apos;autoconf&apos; (IPv6 only). |
