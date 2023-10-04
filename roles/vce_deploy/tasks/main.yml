@@ -1,2 +1,63 @@
 ---
 # tasks file for vce_deploy
+- name: get ip for "{{ inventory_hostname }}"
+  set_fact:
+    eth0_ip: "{{ lookup('dig', inventory_hostname) | ansible.utils.ipaddr }}"
+
+- name: abort if ip address could not be found for host
+  fail:
+    msg: "An IP could not be found for the system, got result: {{ inventory_hostname }}"
+  when: not eth0_ip
+
+
+- name: Create Payload
+  template:
+    src: embedded_vCSA_on_VC.j2
+    dest: /tmp/embedded_vCSA_on_VC.json 
+  delegate_to: '{{ vce.deployment.host }}'
+
+
+- name: Deploy "{{ inventory_hostname }}"
+  ansible.builtin.command:
+    cmd: "./vcsa-deploy install /tmp/embedded_vCSA_on_VC.json --accept-eula --acknowledge-ceip --no-ssl-certificate-verification"
+  ignore_errors: true
+  args:
+    chdir: "{{ vce.deployment.chdir }}"
+  delegate_to: "{{ vce.deployment.host }}"
+
+
+# - name: Wait, that the vcenter "{{ inventory_hostname }}" is up and running
+#   uri:
+#     url: https://{{ inventory_hostname }}/api/v1/cluster/nodes
+#     method: GET
+#     status_code: 200
+#     validate_certs: no
+#     user: "{{ vce.admin_username }}"
+#     password: "{{ vce.admin_password }}"
+#     force_basic_auth: yes
+#   until: nsx_manager.status == 200 and inventory_hostname_short in (nsx_manager.json | json_query('results[*].display_name'))
+#   retries: 100
+#   delay: 15
+#   register: vcenter
+#   delegate_to: "{{ vce.deployment.host }}"
+
+# - name: Wait, that the vcenter "{{ inventory_hostname }}" have /policy/api/v1/infra/sites/default available
+#   uri:
+#     url: https://{{ inventory_hostname }}/policy/api/v1/infra/sites/default
+#     method: GET
+#     status_code: 200
+#     validate_certs: no
+#     user: "{{ nsxt.admin_username }}"
+#     password: "{{ nsxt.admin_password }}"
+#     force_basic_auth: yes
+#   until: sites_default.status == 200
+#   retries: 100
+#   delay: 15
+#   register: sites_default
+#   delegate_to: "{{ vce.deployment.host }}"
+
+# - name: Remove Payload
+#   file:
+#     path: /tmp/embedded_vCSA_on_VC.json
+#     state: absent
+#   delegate_to: "{{ vce.deployment.host }}"
