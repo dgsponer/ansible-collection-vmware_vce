@@ -20,10 +20,27 @@
 | large-xlstorage | | Large vCenter Server with Embedded PSC (x-large storage) | 16 vCPU | 39 GB | 4518 GB | 1000 Hosts | 10000 VMs |
 | xlarge-xlstorage | | X-Large vCenter Server with Embedded PSC (x-large storage) | 24 vCPU | 58 GB | 4643 GB | 2000 Hosts | 35000 VMs |
 
-## Application
+# VAMI Properties
+## Networking Properties
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
-| Network Configuration |||||
+| domain | true | | Domain Name | The domain name of this VM. Leave blank if DHCP is desired. |
+| searchpath | true | | Domain Search Path | The domain search path (comma or space separated domain names) for this VM. Leave blank if DHCP is desired. |
+
+## VM specific properties
+| Parameter | UserConfigurable | Default | Label | Description |
+|---|---|---|---|---|
+| vmname | | VMware-vCenter-Server-Appliance | | |
+
+## Network
+| Parameter | UserConfigurable | Default | Label | Description |
+|---|---|---|---|---|
+| Network 1 | | | | The "Network 1" network |
+
+# Application
+## Network Configuration
+| Parameter | UserConfigurable | Default | Label | Description |
+|---|---|---|---|---|
 | guestinfo.cis.appliance.net.addr.family | true | | Host Network IP Address Family | Network IP address family (i.e., 'ipv4' or 'ipv6'). |
 | guestinfo.cis.appliance.net.mode | true | | Host Network Mode | Network mode (i.e., 'static', 'dhcp', or 'autoconf' (IPv6 only). |
 | guestinfo.cis.appliance.net.addr | true | | Host Network IP Address | Network IP address.  Only provide this when mode is 'static'.  Can be IPv4 or IPv6 based on specified address family. |
@@ -118,20 +135,3 @@
 | guestinfo.cis.env.classification.level | false | none | IL6 classifciation level | Impact Level 6 classification level. Supported values: 'none', 'unclassified', 'controlled', 'cui', 'confidential', 'secret', 'topsecret', 'topsecret_sci'. |
 | guestinfo.cis.vc.desired.state | false | {} | vCenter Desired State Configuations | String encoding JSON object desired state configuration which will be acquired by the deployment. |
 | guestinfo.cis.deployment.license | false | | vCenter License | The licenses to apply during the deployment or upgrade. Format: name1=key1,name2=key2 |
-
-# VAMI Properties
-## Networking Properties
-| Parameter | UserConfigurable | Default | Label | Description |
-|---|---|---|---|---|
-| domain | true | | Domain Name | The domain name of this VM. Leave blank if DHCP is desired. |
-| searchpath | true | | Domain Search Path | The domain search path (comma or space separated domain names) for this VM. Leave blank if DHCP is desired. |
-
-# VM specific properties
-| Parameter | UserConfigurable | Default | Label | Description |
-|---|---|---|---|---|
-| vmname | | VMware-vCenter-Server-Appliance | | |
-
-# Network
-| Parameter | UserConfigurable | Default | Label | Description |
-|---|---|---|---|---|
-| Network 1 | | | | The "Network 1" network |
