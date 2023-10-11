@@ -1,0 +1,4 @@
+---
+# tasks file for vce_config_folder
+- include_tasks: config_folder.yml
+  loop: "{{ vce.folder }}"

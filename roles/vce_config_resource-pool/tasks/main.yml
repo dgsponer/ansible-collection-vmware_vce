@@ -1,0 +1,4 @@
+---
+# tasks file for vce_config_resource-pool
+- include_tasks: config_resource-pool.yml
+  loop: "{{ vce.resource_pool }}"

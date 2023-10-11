@@ -1,0 +1,13 @@
+---
+# tasks file for vce_config_folder
+- name: Config Folder "{{ item.name }}"
+  community.vmware.vcenter_folder:
+    hostname: '{{ inventory_hostname }}'
+    username: '{{ vce.admin_username }}'
+    password: '{{ vce.admin_password }}'
+    datacenter: '{{ item.datacenter }}'
+    folder_name: '{{ item.name }}'
+    folder_type: '{{ item.type }}'
+    parent_folder: '{{ item.parent_folder | default(omit) }}'
+    validate_certs: false
+  delegate_to: "{{ vce.deployment.host }}"

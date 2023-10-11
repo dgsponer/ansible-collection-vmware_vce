@@ -1,0 +1,12 @@
+---
+# tasks file for vce_config_cluster_ha
+- name: Config Cluster HA "{{ item.name }}"
+  community.vmware.vmware_cluster_ha:
+    hostname: '{{ inventory_hostname }}'
+    username: '{{ vce.admin_username }}'
+    password: '{{ vce.admin_password }}'
+    datacenter: '{{ item.datacenter }}'
+    cluster_name: '{{ item.name }}'
+    enable: '{{ item.ha_enable }}'
+    validate_certs: false
+  delegate_to: "{{ vce.deployment.host }}"

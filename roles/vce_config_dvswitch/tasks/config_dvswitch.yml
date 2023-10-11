@@ -1,0 +1,17 @@
+---
+# tasks file for vce_config_dvswitch
+- name: Config dvSwitch "{{ item.name }}"
+  community.vmware.vmware_dvswitch:
+    hostname: '{{ inventory_hostname }}'
+    username: '{{ vce.admin_username }}'
+    password: '{{ vce.admin_password }}'
+    datacenter: '{{ item.datacenter }}'
+    switch: '{{ item.name }}'
+    version: 8.0.0
+    mtu: 1500
+    uplink_quantity: 2
+    discovery_protocol: lldp
+    discovery_operation: both
+    state: '{{ item.state }}'
+    validate_certs: false
+  delegate_to: "{{ vce.deployment.host }}"

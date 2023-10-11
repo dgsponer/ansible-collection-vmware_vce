@@ -1,0 +1,4 @@
+---
+# tasks file for vce_config_datacenter
+- include_tasks: config_datacenter.yml
+  loop: "{{ vce.datacenter }}"
