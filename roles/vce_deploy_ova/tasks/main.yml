@@ -1,13 +1,13 @@
 ---
 # tasks file for vce_deploy_ova
-- name: get ip for "{{ inventory_hostname }}" and "{{ inventory_hostname_short + '-db.' + vcd.deployment.search }}"
+- name: get ip for "{{ inventory_hostname }}" and "{{ inventory_hostname_short }}"
   set_fact:
     eth0_ip: "{{ lookup('dig', inventory_hostname) | ansible.utils.ipaddr }}"
 
-- name: abort if ip address could not be found for host "{{ inventory_hostname }}" or "{{ inventory_hostname_short + '-db.' + vcd.deployment.search }}"
+- name: abort if ip address could not be found for host "{{ inventory_hostname }}"
   fail:
     msg: "An IP could not be found for the system, got result: {{ inventory_hostname }}"
-  when: ( not eth0_ip ) or ( not eth1_ip )
+  when: ( not eth0_ip )
 
 
 # https://docs.vmware.com/en/VMware-Cloud-Director/10.4/VMware-Cloud-Director-Install-Configure-Upgrade-Guide/GUID-2B34775B-7C96-44F2-A9A3-D6A9D3B0CAD2.html
@@ -17,202 +17,64 @@
       - ovftool
       - "--noSSLVerify"
       - "--acceptAllEulas"
-      #- "--X:enableHiddenProperties"
+      - "--X:enableHiddenProperties"
       - "--datastore={{ vce.deployment.datastore }}"
-      #- "--allowAllExtraConfig"
+      - "--allowExtraConfig"
       - "--net:Network 1={{ vce.deployment.eth0.network }}"
       - "--name={{ inventory_hostname }}"
       - "--vmFolder={{ vce.deployment.folder }}"
       - "--diskMode=thin"
-      # ipv4
-      - "--prop:guestinfo.cis.appliance.net.addr.family={{ vce. }}"
-      # static
-      - "--prop:guestinfo.cis.appliance.net.mode={{ vce. }}" 
-      # 172.16.4.41
-      - "--prop:guestinfo.cis.appliance.net.addr={{ vce. }}" 
-      # 26
-      - "--prop:guestinfo.cis.appliance.net.prefix={{ vce. }}" 
-      # 172.16.1.1
-      - "--prop:guestinfo.cis.appliance.net.gateway={{ vce. }}" 
-      # 172.16.1.1
-      - "--prop:guestinfo.cis.appliance.net.dns.servers={{ vce. }}" 
-      # lab01-vce-11.vcloud24.net
-      - "--prop:guestinfo.cis.appliance.net.pnid={{ vce. }}" 
-      # {} *
-      - "--prop:guestinfo.cis.appliance.net.ports={{ vce. }}" 
-      # administrator@vsphere.local *
-      - "--prop:guestinfo.cis.vmdir.username={{ vce. }}" 
-      # **** *
-      - "--prop:guestinfo.cis.vmdir.password={{ vce. }}" 
-      # vsphere.local *
-      - "--prop:guestinfo.cis.vmdir.domain-name={{ vce. }}" 
-      # Default-First-Site *
-      - "--prop:guestinfo.cis.vmdir.site-name={{ vce. }}" 
-      # True *
-      - "--prop:guestinfo.cis.vmdir.first-instance={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.vmdir.replication-partner-hostname={{ vce. }}" 
-      # embedded *
-      - "--prop:guestinfo.cis.db.type={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.db.user={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.db.password={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.db.servername={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.db.serverport={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.db.provider={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.db.instance={{ vce. }}" 
-      # **** *
-      - "--prop:guestinfo.cis.appliance.root.passwd={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.appliance.root.shell={{ vce. }}" 
-      # True
-      - "--prop:guestinfo.cis.appliance.ssh.enabled={{ vce. }}" 
-      # False
-      - "--prop:guestinfo.cis.appliance.time.tools-sync={{ vce. }}" 
-      # 172.16.1.1
-      - "--prop:guestinfo.cis.appliance.ntp.servers={{ vce. }}" 
-      # embedded *
-      - "--prop:guestinfo.cis.deployment.node.type={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.system.vm0.hostname={{ vce. }}" 
-      # 443 *
-      - "--prop:guestinfo.cis.system.vm0.port={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.upgrade.source.vpxd.ip={{ vce. }}" 
-      # 9123 *
-      - "--prop:guestinfo.cis.upgrade.source.ma.port={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.upgrade.source.vpxd.user={{ vce. }}" 
-      # **** *
-      - "--rop:guestinfo.cis.upgrade.source.vpxd.password={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.upgrade.source.guest.user={{ vce. }}" 
-      # **** *
-      - "--prop:guestinfo.cis.upgrade.source.guest.password={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.upgrade.source.guestops.host.addr={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.upgrade.source.guestops.host.user={{ vce. }}" 
-      # **** *
-      - "--prop:guestinfo.cis.upgrade.source.guestops.host.password={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.upgrade.source.ssl.thumbprint={{ vce. }}" 
-      # linux *
-      - "--prop:guestinfo.cis.upgrade.source.platform={{ vce. }}" 
-      # /var/tmp *
-      - "--prop:guestinfo.cis.upgrade.source.export.directory={{ vce. }}" 
-      # /storage/seat/cis-export-folder *
-      - "--prop:guestinfo.cis.upgrade.import.directory={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.upgrade.user.options={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.ad.domain-name={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.ad.domain.username={{ vce. }}" 
-      # **** *
-      - "--prop:guestinfo.cis.ad.domain.password={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.vpxd.ha.management.addr={{ vce. }}" 
-      # 443 *
-      - "--prop:guestinfo.cis.vpxd.ha.management.port={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.vpxd.ha.management.user={{ vce. }}" 
-      # **** *
-      - "--prop:guestinfo.cis.vpxd.ha.management.password={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.vpxd.ha.management.thumbprint={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.vpxd.ha.placement={{ vce. }}" 
-      # True *
-      - "--prop:guestinfo.cis.netdump.enabled={{ vce. }}" 
-      # False *
-      - "--prop:guestinfo.cis.silentinstall={{ vce. }}" 
-      # 900 *
-      - "--prop:guestinfo.cis.lookup_timeout={{ vce. }}" 
-      # en *
-      - "--prop:guestinfo.cis.clientlocale={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.feature.states={{ vce. }}" 
-      # False *
-      - "--prop:guestinfo.cis.ceip_enabled={{ vce. }}" 
-      # True *
-      - "--prop:guestinfo.cis.deployment.autoconfig={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.vpxd.mac-allocation-scheme.prefix={{ vce. }}" 
-      # 0 *
-      - "--prop:guestinfo.cis.vpxd.mac-allocation-scheme.prefix-length={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.vpxd.mac-allocation-scheme.ranges={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.plugin-isolation.hostname={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.osgi.settings.isolation={{ vce. }}" 
-      # True *
-      - "--prop:guestinfo.cis.hadcs.enabled={{ vce. }}" 
-      # False *
-      - "--prop:guestinfo.cis.fips.enabled={{ vce. }}" 
-      # {} *
-      - "--prop:guestinfo.cis.desired.state={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.vsan.postfirstboot.setting={{ vce. }}" 
-      # none *
-      - "--prop:guestinfo.cis.env.classification.level={{ vce. }}" 
-      # {} *
-      - "--prop:guestinfo.cis.vc.desired.state={{ vce. }}" 
-      # 
-      - "--prop:guestinfo.cis.deployment.license={{ vce. }}" 
-      # 
-      - "--prop:vami.domain.VMware-vCenter-Server-Appliance={{ vce. }}" 
-      # 
-      - "--prop:vami.searchpath.VMware-vCenter-Server-Appliance={{ vce. }}" 
-      # VMware-vCenter-Server-Appliance *
-      - "--prop:vm.vmname={{ vce.username }}" 
-      # 
-      - "--deploymentOption={{ vce_deployment_size }}" 
-      # 
+      - "--prop:guestinfo.cis.appliance.net.addr.family=ipv4"
+      - "--prop:guestinfo.cis.appliance.net.mode=static" 
+      - "--prop:guestinfo.cis.appliance.net.addr={{ eth0_ip }}" 
+      - "--prop:guestinfo.cis.appliance.net.prefix={{ vce.deployment.eth0.netmask }}" 
+      - "--prop:guestinfo.cis.appliance.net.gateway={{ vce.deployment.gateway }}" 
+      - "--prop:guestinfo.cis.appliance.net.dns.servers={{ vce.deployment.dns }}" 
+      - "--prop:guestinfo.cis.appliance.net.pnid={{ inventory_hostname }}" 
+      - "--prop:guestinfo.cis.vmdir.username={{ vce.deployment.sso.username | default('administrator@vsphere.local') }}" 
+      - "--prop:guestinfo.cis.vmdir.password={{ vce.deployment.sso.password }}" 
+      - "--prop:guestinfo.cis.vmdir.domain-name={{ vce.deployment.sso.domain | default('vsphere.local') }}" 
+      - "--prop:guestinfo.cis.vmdir.site-name={{ vce.deployment.sso.sitename | default('Default-First-Site') }}" 
+      - "--prop:guestinfo.cis.vmdir.first-instance={{ vce.deployment.sso.firstsite | default(true) }}" 
+      - "--prop:guestinfo.cis.appliance.root.passwd={{ vce.root_password }}" 
+      - "--prop:guestinfo.cis.appliance.ssh.enabled={{ vce.deployment.enable_ssh }}" 
+      - "--prop:guestinfo.cis.appliance.ntp.servers={{ vce.deployment.ntp_server }}" 
+      - "--prop:guestinfo.cis.deployment.autoconfig={{ vce.deployment.autoconfig | default(true) }}" 
+      - "--deploymentOption={{ vce.deployment.deployment_option }}" 
       - "--powerOn"
-      # 
       - "{{ vce.deployment.ova }}" 
-      # 
       - "vi://{{ vce.deployment.vce.username }}:{{ vce.deployment.vce.password }}@{{ vce.deployment.vce.hostname }}/{{ vce.deployment.datacenter }}/host/{{ vce.deployment.cluster }}"
   ignore_errors: true
   args:
     chdir: "{{ vce.deployment.chdir }}"
   delegate_to: "{{ vce.deployment.host }}"
 
-# - name: Connect to "{{ inventory_hostname }}" and get a token
-#   uri:
-#     url: https://{{ inventory_hostname }}/cloudapi/1.0.0/sessions/provider
-#     method: POST
-#     status_code: 200
-#     validate_certs: no
-#     headers:
-#       Accept: application/*;version={{ vcd.api_version }}
-#     user: "{{ vcd.username }}@system"
-#     password: "{{ vcd.password }}"
-#     force_basic_auth: yes
-#   until: vcd_session.status == 200 and vcd_session.x_vmware_vcloud_access_token is defined
-#   retries: 100
-#   delay: 15
-#   register: vcd_session
-#   delegate_to: "{{ vcd.deployment.host }}"
+- name: Connect to "{{ inventory_hostname }}" and get a token
+  uri:
+    url: https://{{ inventory_hostname }}/api/session
+    method: POST
+    status_code: 201
+    validate_certs: no
+    headers:
+    user: "{{ vce.admin_username }}"
+    password: "{{ vce.admin_password }}"
+    force_basic_auth: yes
+  until: vce_session.status == 201 and vce_session.vmware_api_session_id is defined
+  retries: 100
+  delay: 15
+  register: vce_session
+  delegate_to: "{{ vce.deployment.host }}"
 
-# - name: Wait, that the cell "{{ inventory_hostname }}" is up and running
-#   uri:
-#     url: https://{{ inventory_hostname }}/cloudapi/1.0.0/cells
-#     method: GET
-#     status_code: 200
-#     validate_certs: no
-#     headers:
-#       Accept: application/json;version={{ vcd.api_version }}
-#       Authorization: Bearer {{ vcd_session.x_vmware_vcloud_access_token }}
-#   until: vcd_cells.status == 200 and inventory_hostname in (vcd_cells.json | json_query('values[*].name'))
-#   retries: 100
-#   delay: 15
-#   register: vcd_cells
-#   delegate_to: "{{ vcd.deployment.host }}"
+- name: Wait, that "{{ inventory_hostname }}" is up and running
+  uri:
+    url: https://{{ inventory_hostname }}/api/appliance/health/system
+    method: GET
+    status_code: 200
+    validate_certs: no
+    headers:
+      vmware-api-session-id:  "{{ vce_session.vmware_api_session_id }}"
+  until: vce_health_system.status == 200 and vce_health_system.json == "green"
+  retries: 100
+  delay: 15
+  register: vce_health_system
+  delegate_to: "{{ vce.deployment.host }}"

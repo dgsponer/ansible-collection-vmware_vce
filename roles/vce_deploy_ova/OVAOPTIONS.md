@@ -24,13 +24,13 @@
 ## Networking Properties
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
-| domain | true | | Domain Name | The domain name of this VM. Leave blank if DHCP is desired. |
-| searchpath | true | | Domain Search Path | The domain search path (comma or space separated domain names) for this VM. Leave blank if DHCP is desired. |
+| vami.domain.VMware-vCenter-Server-Appliance | true | | Domain Name | The domain name of this VM. Leave blank if DHCP is desired. |
+| vami.searchpath.VMware-vCenter-Server-Appliance | true | | Domain Search Path | The domain search path (comma or space separated domain names) for this VM. Leave blank if DHCP is desired. |
 
 ## VM specific properties
 | Parameter | UserConfigurable | Default | Label | Description |
 |---|---|---|---|---|
-| vmname | | VMware-vCenter-Server-Appliance | | |
+| vm.vmname | | VMware-vCenter-Server-Appliance | | |
 
 ## Network
 | Parameter | UserConfigurable | Default | Label | Description |

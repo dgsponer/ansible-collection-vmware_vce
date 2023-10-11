@@ -1,0 +1,4 @@
+---
+# tasks file for vce_config_dvswitch
+- include_tasks: config_dvswitch.yml
+  loop: "{{ vce.dvswitch }}"
