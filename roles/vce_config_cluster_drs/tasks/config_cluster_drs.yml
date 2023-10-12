@@ -7,8 +7,9 @@
     password: '{{ vce.admin_password }}'
     datacenter: '{{ item.datacenter }}'
     cluster_name: '{{ item.name }}'
-    enable: '{{ item.drs_enable }}'
-    drs_default_vm_behavior: '{{ item.drs_default_vm_behavior }}'
-    drs_vmotion_rate: '{{ item.drs_vmotion_rate }}'
+    enable: '{{ item.drs_enable | default(omit) }}'
+    drs_default_vm_behavior: '{{ item.drs_default_vm_behavior | default(omit) }}'
+    drs_vmotion_rate: '{{ item.drs_vmotion_rate | default(omit) }}'
+    drs_predictive_drs: '{{ item.drs_predictive_drs | default(omit) }}'
     validate_certs: false
   delegate_to: "{{ vce.deployment.host }}"

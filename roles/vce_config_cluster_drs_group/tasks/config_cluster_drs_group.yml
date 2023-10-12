@@ -1,0 +1,28 @@
+---
+# tasks file for vce_config_cluster_drs_group
+- name: Config Cluster DRS VM Group "{{ item.name }}"
+  community.vmware.vmware_drs_group:
+    hostname: '{{ inventory_hostname }}'
+    username: '{{ vce.admin_username }}'
+    password: '{{ vce.admin_password }}'
+    datacenter: '{{ item.datacenter }}'
+    cluster_name: '{{ item.cluster }}'
+    vms: '{{ item.vms }}'
+    state: '{{ item.state }}'
+  when: 
+    - ( item.vms is defined )
+  delegate_to: "{{ vce.deployment.host }}"
+
+
+- name: Config Cluster DRS Host Group "{{ item.name }}"
+  community.vmware.vmware_drs_group:
+    hostname: '{{ inventory_hostname }}'
+    username: '{{ vce.admin_username }}'
+    password: '{{ vce.admin_password }}'
+    datacenter: '{{ item.datacenter }}'
+    cluster_name: '{{ item.cluster }}'
+    hosts: '{{ item.vms }}'
+    state: '{{ item.state }}'
+  when: 
+    - ( item.hosts is defined )
+  delegate_to: "{{ vce.deployment.host }}"

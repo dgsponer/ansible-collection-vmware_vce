@@ -1,6 +1,6 @@
 ---
 # tasks file for vce_deploy_ova
-- name: get ip for "{{ inventory_hostname }}" and "{{ inventory_hostname_short }}"
+- name: get ip for "{{ inventory_hostname }}"
   set_fact:
     eth0_ip: "{{ lookup('dig', inventory_hostname) | ansible.utils.ipaddr }}"
 
@@ -65,7 +65,36 @@
   register: vce_session
   delegate_to: "{{ vce.deployment.host }}"
 
-- name: Wait, that "{{ inventory_hostname }}" is up and running
+- name: Wait, that "{{ inventory_hostname }}" load is green
+  uri:
+    url: https://{{ inventory_hostname }}/api/appliance/health/load
+    method: GET
+    status_code: 200
+    validate_certs: no
+    headers:
+      vmware-api-session-id:  "{{ vce_session.vmware_api_session_id }}"
+  until: vce_health_load.status == 200 and vce_health_load.json == "green"
+  retries: 100
+  delay: 15
+  register: vce_health_load
+  delegate_to: "{{ vce.deployment.host }}"
+
+
+- name: Wait, that "{{ inventory_hostname }}" applmgmt is green
+  uri:
+    url: https://{{ inventory_hostname }}/api/appliance/health/applmgmt
+    method: GET
+    status_code: 200
+    validate_certs: no
+    headers:
+      vmware-api-session-id:  "{{ vce_session.vmware_api_session_id }}"
+  until: vce_health_applmgmt.status == 200 and vce_health_applmgmt.json == "green"
+  retries: 100
+  delay: 15
+  register: vce_health_applmgmt
+  delegate_to: "{{ vce.deployment.host }}"
+
+- name: Wait, that "{{ inventory_hostname }}" system is green
   uri:
     url: https://{{ inventory_hostname }}/api/appliance/health/system
     method: GET
@@ -77,4 +106,18 @@
   retries: 100
   delay: 15
   register: vce_health_system
+  delegate_to: "{{ vce.deployment.host }}"
+
+- name: Wait, that "{{ inventory_hostname }}" /api/vcenter/datacenter is available
+  uri:
+    url: https://{{ inventory_hostname }}/api/vcenter/datacenter
+    method: GET
+    status_code: 200
+    validate_certs: no
+    headers:
+      vmware-api-session-id:  "{{ vce_session.vmware_api_session_id }}"
+  until: vce_health_datacenter.status == 200
+  retries: 100
+  delay: 15
+  register: vce_health_datacenter
   delegate_to: "{{ vce.deployment.host }}"

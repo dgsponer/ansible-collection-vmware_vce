@@ -1,0 +1,4 @@
+---
+# tasks file for vce_config_cluster_drs_group
+- include_tasks: config_cluster_drs_group.yml
+  loop: "{{ vce.drs_group }}"
