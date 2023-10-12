@@ -1,0 +1,14 @@
+---
+# tasks file for vce_config_dvswitch_portgroup
+- set_fact:
+    parameter: '{{ item | combine({ "hostname": inventory_hostname }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "username": vce.admin_username }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "password": vce.admin_password }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "validate_certs": false }) }}'
+
+- name: Config dvSwitch "{{ item.switch_name }}"
+  community.vmware.vmware_dvs_portgroup: "{{ parameter }}"
+  delegate_to: "{{ vce.deployment.host }}"

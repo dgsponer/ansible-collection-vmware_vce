@@ -1,0 +1,4 @@
+---
+# tasks file for vce_config_dvswitch_portgroup
+- include_tasks: config_dvswitch_portgroup.yml
+  loop: "{{ vce.dvswitch_portgroup }}"
