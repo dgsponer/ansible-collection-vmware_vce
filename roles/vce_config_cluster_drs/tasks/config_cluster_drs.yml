@@ -1,15 +1,14 @@
 ---
 # tasks file for vce_config_cluster_drs
-- name: Config Cluster DRS "{{ item.name }}"
-  community.vmware.vmware_cluster_drs:
-    hostname: '{{ inventory_hostname }}'
-    username: '{{ vce.admin_username }}'
-    password: '{{ vce.admin_password }}'
-    datacenter: '{{ item.datacenter }}'
-    cluster_name: '{{ item.name }}'
-    enable: '{{ item.drs_enable | default(omit) }}'
-    drs_default_vm_behavior: '{{ item.drs_default_vm_behavior | default(omit) }}'
-    drs_vmotion_rate: '{{ item.drs_vmotion_rate | default(omit) }}'
-    drs_predictive_drs: '{{ item.drs_predictive_drs | default(omit) }}'
-    validate_certs: false
+- set_fact:
+    parameter: '{{ item | combine({ "hostname": inventory_hostname }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "username": vce.admin_username }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "password": vce.admin_password }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "validate_certs": false }) }}'
+
+- name: Config Cluster DRS "{{ item.cluster_name }}"
+  community.vmware.vmware_cluster_drs: "{{ parameter }}"
   delegate_to: "{{ vce.deployment.host }}"

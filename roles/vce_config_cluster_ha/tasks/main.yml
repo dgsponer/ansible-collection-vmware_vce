@@ -1,4 +1,4 @@
 ---
 # tasks file for vce_config_cluster_ha
 - include_tasks: config_cluster_ha.yml
-  loop: "{{ vce.cluster }}"
+  loop: "{{ vce.cluster_ha }}"

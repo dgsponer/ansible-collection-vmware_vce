@@ -1,28 +1,14 @@
 ---
 # tasks file for vce_config_cluster_drs_group
-- name: Config Cluster DRS VM Group "{{ item.name }}"
-  community.vmware.vmware_drs_group:
-    hostname: '{{ inventory_hostname }}'
-    username: '{{ vce.admin_username }}'
-    password: '{{ vce.admin_password }}'
-    datacenter: '{{ item.datacenter }}'
-    cluster_name: '{{ item.cluster }}'
-    vms: '{{ item.vms }}'
-    state: '{{ item.state }}'
-  when: 
-    - ( item.vms is defined )
-  delegate_to: "{{ vce.deployment.host }}"
+- set_fact:
+    parameter: '{{ item | combine({ "hostname": inventory_hostname }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "username": vce.admin_username }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "password": vce.admin_password }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "validate_certs": false }) }}'
 
-
-- name: Config Cluster DRS Host Group "{{ item.name }}"
-  community.vmware.vmware_drs_group:
-    hostname: '{{ inventory_hostname }}'
-    username: '{{ vce.admin_username }}'
-    password: '{{ vce.admin_password }}'
-    datacenter: '{{ item.datacenter }}'
-    cluster_name: '{{ item.cluster }}'
-    hosts: '{{ item.vms }}'
-    state: '{{ item.state }}'
-  when: 
-    - ( item.hosts is defined )
+- name: Config Cluster DRS Group "{{ item.name }}"
+  community.vmware.vmware_drs_group: "{{ parameter }}"
   delegate_to: "{{ vce.deployment.host }}"

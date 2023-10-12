@@ -1,13 +1,14 @@
 ---
 # tasks file for vce_config_resource-pool
-- name: Config Resource Pool "{{ item.name }}"
-  community.vmware.vmware_resource_pool:
-    hostname: '{{ inventory_hostname }}'
-    username: '{{ vce.admin_username }}'
-    password: '{{ vce.admin_password }}'
-    datacenter: '{{ item.datacenter }}'
-    cluster: '{{ item.cluster }}'
-    resource_pool: '{{ item.name }}'
-    state: '{{ item.state }}'
-    validate_certs: false
+- set_fact:
+    parameter: '{{ item | combine({ "hostname": inventory_hostname }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "username": vce.admin_username }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "password": vce.admin_password }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "validate_certs": false }) }}'
+
+- name: Config Resource Pool "{{ item.resource_pool }}"
+  community.vmware.vmware_resource_pool: "{{ parameter }}"
   delegate_to: "{{ vce.deployment.host }}"

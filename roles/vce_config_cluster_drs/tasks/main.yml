@@ -1,4 +1,4 @@
 ---
 # tasks file for vce_config_cluster_drs
 - include_tasks: config_cluster_drs.yml
-  loop: "{{ vce.cluster }}"
+  loop: "{{ vce.cluster_drs }}"

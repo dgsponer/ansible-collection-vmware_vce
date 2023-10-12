@@ -1,27 +1,14 @@
 ---
 # tasks file for vce_config_cluster_ha
-- name: Config Cluster HA "{{ item.name }}"
-  community.vmware.vmware_cluster_ha:
-    hostname: '{{ inventory_hostname }}'
-    username: '{{ vce.admin_username }}'
-    password: '{{ vce.admin_password }}'
-    datacenter_name: '{{ item.datacenter }}'
-    cluster_name: '{{ item.name }}'
-    enable: '{{ item.ha_enable | default(omit) }}'
-    apd_delay: '{{ item.apd_delay | default(omit) }}'
-    apd_reaction: '{{ item.apd_reaction | default(omit) }}'
-    apd_response: '{{ item.apd_response | default(omit) }}'
-    ha_host_monitoring: '{{ item.ha_host_monitoring | default(omit) }}'
-    ha_restart_priority: '{{ item.ha_restart_priority | default(omit) }}'
-    ha_vm_monitoring: '{{ item.ha_vm_monitoring | default(omit) }}'
-    ha_vm_failure_interval: '{{ item.ha_vm_monitoring.ha_vm_failure_interval | default(omit) }}'
-    ha_vm_max_failure_window: '{{ item.ha_vm_monitoring.ha_vm_max_failure_window | default(omit) }}'
-    ha_vm_max_failures: '{{ item.ha_vm_monitoring.ha_vm_max_failures | default(omit) }}'
-    ha_vm_min_up_time: '{{ item.ha_vm_monitoring.ha_vm_min_up_time | default(omit) }}'
-    host_isolation_response: '{{ item.host_isolation_response | default(omit) }}'
-    pdl_response: '{{ item.pdl_response | default(omit) }}'
-    failover_host_admission_control: '{{ item.failover_host_admission_control | default(omit) }}'
-    slot_based_admission_control: '{{ item.slot_based_admission_control | default(omit) }}'
-    reservation_based_admission_control: '{{ item.reservation_based_admission_control | default(omit) }}'
-    validate_certs: false
+- set_fact:
+    parameter: '{{ item | combine({ "hostname": inventory_hostname }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "username": vce.admin_username }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "password": vce.admin_password }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "validate_certs": false }) }}'
+
+- name: Config Cluster HA "{{ item.cluster_name }}"
+  community.vmware.vmware_cluster_ha: "{{ parameter }}"
   delegate_to: "{{ vce.deployment.host }}"

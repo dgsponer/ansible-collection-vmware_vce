@@ -1,25 +1,14 @@
 ---
 # tasks file for vce_config_dvswitch
-- name: Config dvSwitch "{{ item.name }}"
-  community.vmware.vmware_dvswitch:
-    hostname: '{{ inventory_hostname }}'
-    username: '{{ vce.admin_username }}'
-    password: '{{ vce.admin_password }}'
-    datacenter_name: '{{ item.datacenter }}'
-    description: '{{ item.description | default(omit) }}'
-    contact: '{{ item.contact | default(omit) }}'
-    discovery_operation: '{{ item.discovery_operation | default(omit) }}'
-    discovery_protocol: '{{ item.discovery_protocol | default(omit) }}'
-    folder: '{{ item.folder | default(omit) }}'
-    health_check: '{{ item.health_check | default(omit) }}'
-    mtu: '{{ item.mtu | default(omit) }}'
-    multicast_filtering_mode: '{{ item.multicast_filtering_mode | default(omit) }}'
-    net_flow: '{{ item.net_flow | default(omit) }}'
-    network_policy: '{{ item.network_policy | default(omit) }}'
-    state: '{{ item.state }}'
-    switch_name: '{{ item.name }}'
-    switch_version: '{{ item.switch_version }}'
-    uplink_prefix: '{{ item.uplink_prefix | default(omit) }}'
-    uplink_quantity: '{{ item.uplink_quantity }}'
-    validate_certs: false
+- set_fact:
+    parameter: '{{ item | combine({ "hostname": inventory_hostname }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "username": vce.admin_username }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "password": vce.admin_password }) }}'
+- set_fact:
+    parameter: '{{ parameter | combine({ "validate_certs": false }) }}'
+
+- name: Config dvSwitch "{{ item.switch_name }}"
+  community.vmware.vmware_dvswitch: "{{ parameter }}"
   delegate_to: "{{ vce.deployment.host }}"
